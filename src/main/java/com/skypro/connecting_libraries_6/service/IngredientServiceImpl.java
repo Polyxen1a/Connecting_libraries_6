@@ -1,5 +1,6 @@
 package com.skypro.connecting_libraries_6.service;
 
+import com.skypro.connecting_libraries_6.Exceptions.IngredientExistsException;
 import com.skypro.connecting_libraries_6.model.Ingredient;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
