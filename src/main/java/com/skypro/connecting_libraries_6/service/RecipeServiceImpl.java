@@ -26,10 +26,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe getRecipe(Integer id) {
-        if (!recipeMap.containsKey(id)) {
-            throw new NotFoundException("Рецепт с заданным id не найден");
-        }
-        return recipeMap.get(id);
+        return recipeMap.getOrDefault(id, null);
     }
 
     @Override
@@ -52,4 +49,5 @@ public class RecipeServiceImpl implements RecipeService {
         }
         return recipeMap.put(id, recipe);
     }
+
 }
