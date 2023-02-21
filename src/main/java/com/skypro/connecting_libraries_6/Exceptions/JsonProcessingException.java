@@ -4,7 +4,7 @@ package com.skypro.connecting_libraries_6.Exceptions;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonLocation;
 
-public class JsonProcessingException extends JacksonException {
+public class JsonProcessingException {
     private static final long serialVersionUID = 123L;
     protected JsonLocation location;
 

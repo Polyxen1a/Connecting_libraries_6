@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonLocation;
 
 import java.io.IOException;
 
-public abstract class JacksonException extends IOException {
+public abstract class JacksonException {
     private static final long serialVersionUID = 123L;
 
     protected JacksonException(String msg) {

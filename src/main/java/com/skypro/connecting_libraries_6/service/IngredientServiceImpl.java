@@ -21,10 +21,10 @@ public class IngredientServiceImpl implements IngredientService {
     private final FileService fileService;
 
     public IngredientServiceImpl(@Qualifier("ingredientFileService") FileService fileService) {
-
+        this.fileService = fileService;
     }
 
-    private final Map<Integer, Ingredient> ingredientMap = new HashMap<>();
+    private Map<Integer, Ingredient> ingredientMap = new HashMap<>();
     private static Integer id = 0;
 
     @Override
@@ -46,7 +46,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    Collection<Ingredient> getAll() {
+    public Collection<Ingredient> getAll() {
         return ingredientMap.values();
     }
 
@@ -77,7 +77,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     private void readFromFileIngredient() throws FileProcessingException {
         try {
-            String json = fileService.readFromFile();
+            String json = FileService.readFromFile();
             ingredientMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
             });
         } catch (JsonProcessingException e) {

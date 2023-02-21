@@ -30,7 +30,7 @@ public class IngredientFileServiceImpl implements FileService {
     }
 
     @Override
-    public File readFromFile() {
+    public String readFromFile() {
         if (Files.exists(Path.of(dataFilePathIngredient, dataFileNameIngredient))) {
             try {
                 return Files.readString((Path.of(dataFilePathIngredient, dataFileNameIngredient)));

@@ -29,33 +29,36 @@ public class RecipeFileServiceImpl implements FileService {
             return false;
         }
     }
+
     @Override
-    public File readFromFile() {
+    public String readFromFile() {
         if (Files.exists(Path.of(dataFilePathIngredient, dataFileNameRecipe))) {
             try {
-                return Files.readString((Path.of(dataFilePathIngredient, dataFileNameRecipe));
-        } catch(IOException e) {
-                throw new FileProcessingException("не удалось прочиать файл");
-            } else {
-                return "{}";
-            }
-        }
-        @Override
-                public boolean cleanDataFile() {
-            try {
-                Path path = Path.of(dataFilePathIngredient, dataFileNameRecipe);
-                Files.deleteIfExists(path);
-                Files.createFile(path);
-                return true;
+                return Files.readString((Path.of(dataFilePathIngredient, dataFileNameRecipe)));
             } catch (IOException e) {
-                e.printStackTrace();
-                return false;
+                throw new FileProcessingException("не удалось прочитать файл");
             }
+        } else {
+            return "{}";
         }
-        @Override
-                public File getDataFileTxt() {
-            return new File(dataFilePathIngredient + "/" + dataFileNameRecipe);
-        }
-
     }
+
+    @Override
+    public boolean cleanDataFile() {
+        try {
+            Path path = Path.of(dataFilePathIngredient, dataFileNameRecipe);
+            Files.deleteIfExists(path);
+            Files.createFile(path);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public File getDataFileTxt() {
+        return new File(dataFilePathIngredient + "/" + dataFileNameRecipe);
+    }
+
 }
