@@ -5,7 +5,8 @@ import com.skypro.connecting_libraries_6.model.Ingredient;
 import java.util.Collection;
 
 public interface IngredientService {
-    int addIngredient(Ingredient ingredient);
+    Ingredient addIngredient(Ingredient ingredient);
+
     Ingredient getIngredient(Integer id);
 
     Collection<Ingredient> getAll();

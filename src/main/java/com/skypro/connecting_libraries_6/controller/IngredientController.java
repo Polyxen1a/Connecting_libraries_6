@@ -61,11 +61,12 @@ public class IngredientController {
             )
     })
     @PostMapping
-    ResponseEntity<Ingredient> addIngredient(@Valid @RequestBody Ingredient ingredient) {
+    ResponseEntity<String> addIngredient(@Valid @RequestBody Ingredient ingredient) {
         if (StringUtils.isBlank(ingredient.getName())) {
             return ResponseEntity.badRequest().body("Название ингредиента не может быть пустым");
         }
-        return ResponseEntity.ok(ingredientService.addIngredient(ingredient));
+
+        return null;
     }
 
     @GetMapping

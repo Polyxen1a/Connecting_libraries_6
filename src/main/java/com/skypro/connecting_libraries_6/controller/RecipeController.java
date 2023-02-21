@@ -1,6 +1,8 @@
 package com.skypro.connecting_libraries_6.controller;
 
+import com.skypro.connecting_libraries_6.model.Ingredient;
 import com.skypro.connecting_libraries_6.model.Recipe;
+import com.skypro.connecting_libraries_6.service.IngredientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -11,16 +13,32 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import org.webjars.NotFoundException;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+
+
+        import io.swagger.v3.oas.annotations.Operation;
+        import io.swagger.v3.oas.annotations.Parameter;
+        import io.swagger.v3.oas.annotations.Parameters;
+        import io.swagger.v3.oas.annotations.media.Content;
+        import io.swagger.v3.oas.annotations.media.Schema;
+        import io.swagger.v3.oas.annotations.responses.ApiResponse;
+        import io.swagger.v3.oas.annotations.responses.ApiResponses;
+        import io.swagger.v3.oas.annotations.tags.Tag;
+        import jakarta.validation.Valid;
+        import lombok.RequiredArgsConstructor;
+        import org.springframework.http.HttpStatus;
+        import org.springframework.http.ResponseEntity;
+        import org.springframework.validation.FieldError;
+        import org.springframework.web.bind.MethodArgumentNotValidException;
+        import org.springframework.web.bind.annotation.*;
+        import org.webjars.NotFoundException;
+
+        import java.util.Collection;
+        import java.util.HashMap;
+        import java.util.Map;
 
 
 @RestController
@@ -42,8 +60,8 @@ public class RecipeController {
 
     @GetMapping("/all")
     @Operation(summary = "Получение всех рецептов", description = "Поиск производится без параментров")
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Рецепты получены" )})
-    ResponseEntity<Collection<Recipe>> getRecipe() {
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Рецепты получены")})
+    ResponseEntity<Collection<Ingredient>> getRecipe(IngredientService recipeService) {
         return ResponseEntity.ok(recipeService.getAll());
     }
 
@@ -56,7 +74,7 @@ public class RecipeController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Изменение рецептов по id")
-    @ApiResponse(value = {
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Рецепт изменен",
@@ -76,9 +94,10 @@ public class RecipeController {
     ResponseEntity<Recipe> updateRecipe(@PathVariable Integer id, @Valid @RequestBody Recipe recipe) {
         return ResponseEntity.ok(recipeService.updateRecipe(id, recipe));
     }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Удаление рецептом по id")
-    @ApiResponse(value = {
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Рецепт удален"
@@ -88,9 +107,10 @@ public class RecipeController {
     ResponseEntity<Recipe> removeRecipe(@PathVariable Integer id) {
         return ResponseEntity.ok(recipeService.removeRecipe(id));
     }
+
     @GetMapping
     @Operation(summary = "Получение всех рецептов", description = "поиск производится без параментов")
-    @ApiResponse(value = {@ApiResponse(responseCode = "200", description = "Рецепты получены")})
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Рецепты получены")})
     ResponseEntity<Collection<Recipe>> getRecipesIngredientId() {
         return ResponseEntity.ok(recipeService.getAll());
     }
@@ -113,4 +133,6 @@ public class RecipeController {
     public String handleNotFoundException(NotFoundException notFoundException) {
         return notFoundException.getMessage();
     }
+
+    private final com.skypro.connecting_libraries_6.service.RecipeService recipeService;
 }
