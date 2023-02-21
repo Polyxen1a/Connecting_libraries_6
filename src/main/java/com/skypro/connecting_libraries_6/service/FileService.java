@@ -6,7 +6,7 @@ public interface FileService {
 
     boolean saveToFile(String json);
 
-    File readFromFile();
+    String readFromFile();
 
     boolean cleanDataFile();
 

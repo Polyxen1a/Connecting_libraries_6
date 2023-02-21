@@ -1,5 +1,6 @@
 package com.skypro.connecting_libraries_6.service;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.skypro.connecting_libraries_6.Exceptions.FileProcessingException;
@@ -18,6 +19,12 @@ public class IngredientFileServiceImpl implements FileService {
     @Value("${ingredient.json}")
     private String dataFileNameIngredient;
 
+    private Path path;
+
+    @PostConstruct
+    private void init() {
+        path = Path.of(dataFilePathIngredient, dataFileNameIngredient);
+    }
     @Override
     public boolean saveToFile(String json) {
         try {

@@ -6,6 +6,7 @@ import java.util.Collection;
 
 public interface IngredientService {
     int addIngredient(Ingredient ingredient);
+
     Ingredient getIngredient(Integer id);
 
     Collection<Ingredient> getAll();
