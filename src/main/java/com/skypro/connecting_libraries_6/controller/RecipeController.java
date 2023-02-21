@@ -1,6 +1,9 @@
 package com.skypro.connecting_libraries_6.controller;
 
+import com.skypro.connecting_libraries_6.model.Ingredient;
 import com.skypro.connecting_libraries_6.model.Recipe;
+import com.skypro.connecting_libraries_6.service.IngredientService;
+import com.skypro.connecting_libraries_6.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -36,21 +39,21 @@ public class RecipeController {
             @ApiResponse(responseCode = "200", description = "Рецепт был найден")})
     @Parameters(value = {@Parameter(name = "id", example = "1")})
     @GetMapping("/{id}")
-    ResponseEntity<Recipe> getRecipe(@PathVariable Integer id) {
+    ResponseEntity<Recipe> getRecipe(@PathVariable Integer id, RecipeController recipeService) {
         return ResponseEntity.ok(recipeService.getRecipe(id));
     }
 
     @GetMapping("/all")
     @Operation(summary = "Получение всех рецептов", description = "Поиск производится без параментров")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Рецепты получены" )})
-    ResponseEntity<Collection<Recipe>> getRecipe() {
+    ResponseEntity<Collection<Ingredient>> getRecipe(IngredientService recipeService) {
         return ResponseEntity.ok(recipeService.getAll());
     }
 
     @PostMapping
     @Operation(summary = "Добавление рецепта")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Рецепт добавлен")})
-    ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe) {
+    ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe, RecipeController recipeService) {
         return ResponseEntity.ok(recipeService.addRecipe(recipe));
     }
 

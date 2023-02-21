@@ -8,7 +8,6 @@ import com.skypro.connecting_libraries_6.Exceptions.IngredientExistsException;
 import com.skypro.connecting_libraries_6.model.Ingredient;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
 import java.util.Collection;
@@ -28,13 +27,13 @@ public class IngredientServiceImpl implements IngredientService {
     private static Integer id = 0;
 
     @Override
-    public Ingredient addIngredient(Ingredient ingredient) {
+    public int addIngredient(Ingredient ingredient) {
         if (ingredientMap.containsValue((ingredient))) {
             throw new IngredientExistsException();
         }
         ingredientMap.put(id++, ingredient);
         saveToFileIngredient();
-        return ingredient;
+        return ingredient.getCount();
     }
 
     @Override
