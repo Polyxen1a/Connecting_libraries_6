@@ -27,13 +27,13 @@ public class IngredientServiceImpl implements IngredientService {
     private static Integer id = 0;
 
     @Override
-    public int addIngredient(Ingredient ingredient) {
+    public Ingredient addIngredient(Ingredient ingredient) {
         if (ingredientMap.containsValue((ingredient))) {
             throw new IngredientExistsException();
         }
         ingredientMap.put(id++, ingredient);
         saveToFileIngredient();
-        return ingredient.getCount();
+        return ingredient;
     }
 
     @Override
