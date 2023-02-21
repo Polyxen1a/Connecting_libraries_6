@@ -76,7 +76,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     private void readFromFileIngredient() throws FileProcessingException {
         try {
-            String json = FileService.readFromFile();
+            String json = fileService.readFromFile();
             ingredientMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
             });
         } catch (JsonProcessingException e) {
