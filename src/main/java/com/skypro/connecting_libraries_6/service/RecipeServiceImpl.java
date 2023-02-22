@@ -13,15 +13,23 @@ import java.util.Map;
 
 public class RecipeServiceImpl implements RecipeService {
 
-    private final IngredientService ingredientService;
+    private final FileService fileService;
 
-    private final Map<Integer, Recipe> recipeMap = new HashMap<>();
+    private Map<Integer, Recipe> recipeMap = new HashMap<>();
     private static Integer id = 0;
+
+    public Map<Integer, Recipe> getRecipeMap() {
+        return recipeMap;
+    }
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
         recipeMap.put(id++, recipe);
+        saveToFileRecipe();
         return recipe;
+    }
+
+    private void saveToFileRecipe() {
     }
 
     @Override

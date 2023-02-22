@@ -1,5 +1,6 @@
 package com.skypro.connecting_libraries_6.service;
 
+import com.skypro.connecting_libraries_6.model.Recipe;
 import jakarta.annotation.PostConstruct;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Map;
+
 @Service("ingredientFileService")
 public class IngredientFileServiceImpl implements FileService {
     @Value("${scr/main/resources}")
@@ -63,10 +66,17 @@ public class IngredientFileServiceImpl implements FileService {
     }
 
     @Override
-    public InputStreamResource exportFile() throws FileNotFoundException {
+    public InputStreamResource exportFile(Map<Integer, Recipe> recipeMap) throws FileNotFoundException {
         File file = getDataFile();
         return new InputStreamResource(new FileInputStream(file));
     }
+
+    @Override
+    public InputStreamResource exportTxtFile(Map<Integer, Recipe> recipeMap) throws IOException {
+        File file = getDataFile();
+        return new InputStreamResource(new FileInputStream(file));
+    }
+
     @Override
     public void importFile(MultipartFile file) throws FileNotFoundException {
         cleanDataFile();
