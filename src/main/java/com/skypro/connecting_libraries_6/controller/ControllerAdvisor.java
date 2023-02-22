@@ -39,7 +39,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(FileNotFoundException.class)
-    public String handleFileProcessingExceptions(FileProcessingException ex) {
+    public String handleFileNotfoundExceptions(FileProcessingException ex) {
         return ex.getMessage();
     }
 

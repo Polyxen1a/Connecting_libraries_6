@@ -20,6 +20,7 @@ public class RecipeFileServiceImpl implements FileService {
     private String dataFilePathIngredient;
     @Value("${recipe.json}")
     private String dataFileNameRecipe;
+    private Path path;
 
     @Override
     public boolean saveToFile(String json) {
