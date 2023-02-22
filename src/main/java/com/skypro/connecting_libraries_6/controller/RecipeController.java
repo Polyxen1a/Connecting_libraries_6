@@ -18,6 +18,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.webjars.NotFoundException;
 
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class RecipeController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Изменение рецептов по id")
-    @ApiResponse(value = {
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Рецепт изменен",
@@ -78,7 +79,7 @@ public class RecipeController {
     }
     @DeleteMapping("/{id}")
     @Operation(summary = "Удаление рецептом по id")
-    @ApiResponse(value = {
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Рецепт удален"
@@ -90,7 +91,7 @@ public class RecipeController {
     }
     @GetMapping
     @Operation(summary = "Получение всех рецептов", description = "поиск производится без параментов")
-    @ApiResponse(value = {@ApiResponse(responseCode = "200", description = "Рецепты получены")})
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Рецепты получены")})
     ResponseEntity<Collection<Recipe>> getRecipesIngredientId() {
         return ResponseEntity.ok(recipeService.getAll());
     }
@@ -113,4 +114,6 @@ public class RecipeController {
     public String handleNotFoundException(NotFoundException notFoundException) {
         return notFoundException.getMessage();
     }
+
+    private final com.skypro.connecting_libraries_6.service.RecipeService recipeService;
 }
