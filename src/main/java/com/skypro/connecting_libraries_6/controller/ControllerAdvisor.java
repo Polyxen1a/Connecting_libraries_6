@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.webjars.NotFoundException;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -38,9 +39,19 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler implements
     }
 
     @Override
+    public String handleFileNotfoundExceptions(FileProcessingException ex) {
+        return null;
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(FileNotFoundException.class)
-    public String handleFileNotfoundExceptions(FileProcessingException ex) {
+    public String handleFileNotFoundExceptions(FileProcessingException ex) {
+        return ex.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public String handleFoundExceptions(NotFoundException ex) {
         return ex.getMessage();
     }
 
