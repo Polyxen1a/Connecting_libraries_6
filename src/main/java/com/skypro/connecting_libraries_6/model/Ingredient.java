@@ -2,15 +2,13 @@ package com.skypro.connecting_libraries_6.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @EqualsAndHashCode
+@ToString
 
 public class Ingredient {
     @NotBlank(message = "Имя обязательно")

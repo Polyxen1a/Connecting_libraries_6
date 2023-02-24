@@ -4,6 +4,7 @@ package com.skypro.connecting_libraries_6.service;
 import com.skypro.connecting_libraries_6.model.Recipe;
 
 import java.util.Collection;
+import java.util.Map;
 
 public interface RecipeService {
 
@@ -16,4 +17,6 @@ public interface RecipeService {
     Recipe removeRecipe(int id);
 
     Recipe updateRecipe(int id, Recipe recipe);
+
+    Map<Integer, Recipe> getRecipeMap();
 }

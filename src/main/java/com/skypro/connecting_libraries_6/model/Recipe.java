@@ -3,10 +3,7 @@ package com.skypro.connecting_libraries_6.model;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode
+@ToString
 
 public class Recipe {
     @NotBlank

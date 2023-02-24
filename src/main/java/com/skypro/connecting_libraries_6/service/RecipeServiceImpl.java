@@ -1,9 +1,14 @@
 package com.skypro.connecting_libraries_6.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.skypro.connecting_libraries_6.Exceptions.FileProcessingException;
 import com.skypro.connecting_libraries_6.model.Recipe;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,14 +18,19 @@ import java.util.Map;
 
 public class RecipeServiceImpl implements RecipeService {
 
-    private final IngredientService ingredientService;
+    private final FileService fileService;
 
-    private final Map<Integer, Recipe> recipeMap = new HashMap<>();
+    private Map<Integer, Recipe> recipeMap = new HashMap<>();
     private static Integer id = 0;
+
+    public Map<Integer, Recipe> getRecipeMap() {
+        return recipeMap;
+    }
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
         recipeMap.put(id++, recipe);
+        saveToFileRecipe();
         return recipe;
     }
 
@@ -51,5 +61,14 @@ public class RecipeServiceImpl implements RecipeService {
             throw new NotFoundException("Рецепт с заданным id не найден");
         }
         return recipeMap.put(id, recipe);
+    }
+    @PostConstruct
+    private void saveToFileRecipe() throws FileProcessingException {
+        try {
+            String json = new ObjectMapper().writeValueAsString(recipeMap);
+            fileService.saveToFile(json);
+        } catch (JsonProcessingException e) {
+            throw new FileProcessingException("Рецепт не удалось сохранить");
+        }
     }
 }

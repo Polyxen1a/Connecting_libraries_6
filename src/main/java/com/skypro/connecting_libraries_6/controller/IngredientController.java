@@ -61,11 +61,11 @@ public class IngredientController {
             )
     })
     @PostMapping
-    ResponseEntity<Ingredient> addIngredient(@Valid @RequestBody Ingredient ingredient) {
+    ResponseEntity<String> addIngredient(@Valid @RequestBody Ingredient ingredient) {
         if (StringUtils.isBlank(ingredient.getName())) {
             return ResponseEntity.badRequest().body("Название ингредиента не может быть пустым");
         }
-        return ResponseEntity.ok(ingredientService.addIngredient(ingredient));
+        return null;
     }
 
     @GetMapping
@@ -122,9 +122,9 @@ public class IngredientController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
+        Map <String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getDefaultMessage();
+            String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
